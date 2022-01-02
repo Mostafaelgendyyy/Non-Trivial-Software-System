@@ -6,19 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+//
 public class Ride {
-    private static int count=1;
-    private int id ;
+    private static int count = 1;
+    private int id;
     private String source;
     private String destination;
     private double price;
     private double PriceDis;
-    private RideSuggestedDrivers suggestedDrivers= new RideSuggestedDrivers();
+    private RideSuggestedDrivers suggestedDrivers = new RideSuggestedDrivers();
     private RideControl rideControl = new RideControl();
     private RideEvents rideEvents = new RideEvents();
     private Discount discount;
     private String DisType;
-    private boolean acceptother= false;
+    private boolean acceptother = false;
 
     public Ride(String source, String des, Customer cu) {
         this.source = source;
@@ -28,9 +29,10 @@ public class Ride {
         ++count;
         this.canAccept();
     }
+
     public void canAccept() {
         Scanner input = new Scanner(System.in);
-        while (true){
+        while (true) {
             System.out.println("Do you want to share your Ride with another Passenger? ");
             System.out.println("1-Yes ");
             System.out.println("2-No");
@@ -71,46 +73,34 @@ public class Ride {
     public Discount getDiscount() {
         return discount;
     }
-    public double DefineDiscount(String type)
-    {
-        if (type.equalsIgnoreCase("BirthDate"))
-        {
-            discount= new DiscountBirthdate();
+
+    public double DefineDiscount(String type) {
+        if (type.equalsIgnoreCase("BirthDate")) {
+            discount = new DiscountBirthdate();
             this.PriceDis = discount.calPrice(price);
-            this.price=PriceDis;
-        }
-        else if (type.equalsIgnoreCase("FirstRide"))
-        {
-            discount= new FirstRideDiscount();
+            this.price = PriceDis;
+        } else if (type.equalsIgnoreCase("FirstRide")) {
+            discount = new FirstRideDiscount();
             this.PriceDis = discount.calPrice(price);
-            this.price=PriceDis;
-        }
-        else if (type.equalsIgnoreCase("NoDiscount"))
-        {
-            discount= new NoDiscount();
+            this.price = PriceDis;
+        } else if (type.equalsIgnoreCase("NoDiscount")) {
+            discount = new NoDiscount();
             this.PriceDis = discount.calPrice(price);
-        }
-        else if (type.equalsIgnoreCase("DiscountPassenger"))
-        {
-            discount= new DiscountPassenger();
+        } else if (type.equalsIgnoreCase("DiscountPassenger")) {
+            discount = new DiscountPassenger();
             this.PriceDis = discount.calPrice(price);
-            this.price=PriceDis;
-        }
-        else if (type.equalsIgnoreCase("DiscountSpecificArea"))
-        {
-            discount= new DiscountSpecificArea();
-            this.PriceDis= discount.calPrice(price);
-        }
-        else if (type.equalsIgnoreCase("HolidayRide"))
-        {
-                discount= new HolidayDiscount();
-                this.PriceDis = discount.calPrice(price);
-                this.price=PriceDis;
+            this.price = PriceDis;
+        } else if (type.equalsIgnoreCase("DiscountSpecificArea")) {
+            discount = new DiscountSpecificArea();
+            this.PriceDis = discount.calPrice(price);
+        } else if (type.equalsIgnoreCase("HolidayRide")) {
+            discount = new HolidayDiscount();
+            this.PriceDis = discount.calPrice(price);
+            this.price = PriceDis;
 
         }
         return this.PriceDis;
     }
-
 
     public void setDiscount(Discount discount) {
         this.discount = discount;
@@ -156,7 +146,5 @@ public class Ride {
     public void setPrice(double price) {
         this.price = price;
     }
-
-
 
 }

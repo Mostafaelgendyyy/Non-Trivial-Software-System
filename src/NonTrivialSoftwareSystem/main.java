@@ -11,7 +11,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
-/////////main/////////////
+
+//
 public class main {
     static Admin x = new Admin("admin", "01178", "a1@gmail.com", "124563");
 
@@ -109,7 +110,6 @@ public class main {
         }
     }
 
-
     public static void login() {
         while (true) {
             Scanner input = new Scanner(System.in);
@@ -201,7 +201,8 @@ public class main {
                             int rate = input.nextInt();
                             cust.getRideRating().rateRide(rate, cust);
                         } else if (choice == 5) {
-                            if (cust.getCustomerRide().getRide() == null || cust.getCustomerRide().getRide().getRideControl().getDriver() == null) {
+                            if (cust.getCustomerRide().getRide() == null
+                                    || cust.getCustomerRide().getRide().getRideControl().getDriver() == null) {
                                 System.out.println("Sorry,There is no driver to get his data.");
                             } else {
                                 cust.getCustomerRide().getRide().printRideInfo();
@@ -290,43 +291,36 @@ public class main {
     static DiscountArea discountArea = DiscountArea.getDiscountArea();
 
     public static void main(String[] args) throws ParseException {
-        Admin x= new Admin("admin","01178","a1@gmail.com","124563");
+        Admin x = new Admin("admin", "01178", "a1@gmail.com", "124563");
         dataAdmin.addadmin(x);
-        Customer z = new Customer("mostafa","454","jkjkjk","789", "2001-04-21");
-        Driver zd = new Driver("farida","454","jkjkjk","789", "jk", "30104212102878");
-        Customer d= new Customer("ka","kn","ihi","123","2012-1-2");
+        Customer z = new Customer("mostafa", "454", "jkjkjk", "789", "2001-04-21");
+        Driver zd = new Driver("farida", "454", "jkjkjk", "789", "jk", "30104212102878");
+        Customer d = new Customer("ka", "kn", "ihi", "123", "2012-1-2");
         dataCustomer.addCustomer(d);
         dataCustomer.addCustomer(z);
         dataDriver.addpenders(zd);
         System.out.println("Welcome to Online Transportation System.");
         Scanner input = new Scanner(System.in);
-        while (true)
-        {
+        while (true) {
             System.out.println("1-Login");
             System.out.println("2-SignUp");
             System.out.println("3-Exit");
-            int c= input.nextInt();
-            if (c==1)
-            {
+            int c = input.nextInt();
+            if (c == 1) {
                 login();
-            }
-            else if (c==2)
-            {
+            } else if (c == 2) {
                 signup();
-            }
-            else if(c==3)
-            {
+            } else if (c == 3) {
                 break;
-            }
-            else {
+            } else {
                 System.out.println("Please Enter Right Choice");
             }
         }
     }
 }
 /*
-        Driver d= new Driver("akm","kn","ihi","123","k","30104212102878");
-        alldata.addpenders(d);
-        Customer zd= new Customer("ka","kn","ihi","123");
-        alldata.addCustomer(zd);
+ * Driver d= new Driver("akm","kn","ihi","123","k","30104212102878");
+ * alldata.addpenders(d);
+ * Customer zd= new Customer("ka","kn","ihi","123");
+ * alldata.addCustomer(zd);
  */
