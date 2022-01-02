@@ -20,13 +20,13 @@ public class CustomerRideActions {
         int daycur = currentDate.getDayOfMonth();
 
         Month monthcur = currentDate.getMonth();
-        //String birth = c.getBirthday();
+        
         LocalDate birthdate = LocalDate.parse(c.getBirthday());
 
         int daybirth = birthdate.getDayOfMonth();
 
         Month monthbirth = birthdate.getMonth();
-        ///////////////////////////////////////////////////////////////
+       
         Date x = new Date();
         String dayWeekText = new SimpleDateFormat("EEEE").format(x);
 
