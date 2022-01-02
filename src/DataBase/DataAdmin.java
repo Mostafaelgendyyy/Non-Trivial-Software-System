@@ -1,7 +1,7 @@
 package DataBase;
 import NonTrivialSoftwareSystem.*;
 import java.util.LinkedList;
-
+//
 public class DataAdmin {
     private LinkedList<Admin> admins = new LinkedList<Admin>();
 
