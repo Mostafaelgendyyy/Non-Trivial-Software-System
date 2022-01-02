@@ -2,7 +2,7 @@ package NonTrivialSoftwareSystem;
 
 import java.util.Date;
 import java.util.LinkedList;
-
+///////////////////////////////////////////////////////////////////
 public class RideEvents {
     LinkedList<Event> AllEvents = new LinkedList<Event>();
 

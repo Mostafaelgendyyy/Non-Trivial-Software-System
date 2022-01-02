@@ -1,7 +1,7 @@
 package NonTrivialSoftwareSystem;
 
 import java.util.Date;
-
+///////////////////////////////////////////////////////
 public class AcceptingCapPriceEvent extends Event{
     String Cust_name;
     public AcceptingCapPriceEvent(Date etime,String cus)

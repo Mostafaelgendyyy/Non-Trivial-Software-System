@@ -1,7 +1,7 @@
 package NonTrivialSoftwareSystem;
 
 import java.util.Date;
-
+///////////////////////////////////
 public abstract class Event {
     private String Eventname;
     private Date Eventtime;

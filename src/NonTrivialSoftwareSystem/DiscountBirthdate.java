@@ -1,5 +1,5 @@
 package NonTrivialSoftwareSystem;
-
+//////////////////////////////////////
 public class DiscountBirthdate implements Discount{
 
     @Override
