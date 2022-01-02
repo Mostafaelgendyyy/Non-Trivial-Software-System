@@ -1,18 +1,28 @@
+package NonTrivialSoftwareSystem;
+
+import DataBase.*;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.concurrent.Callable;
 
 public class main {
-    public static void signup()
-    {
-        while (true)
-        {
+    static Admin x = new Admin("admin", "01178", "a1@gmail.com", "124563");
+
+    public static void signup() throws ParseException {
+        while (true) {
             Scanner input = new Scanner(System.in);
             System.out.println("1-SignUp as Customer.");
             System.out.println("2-SignUp as Driver.");
             System.out.println("3-Exit");
-            int choice2= input.nextInt();
-            if (choice2==1)
-            {
+            int choice2 = input.nextInt();
+            if (choice2 == 1) {
                 System.out.print("*Enter Your E-mail: ");
                 String em = input.next();
                 System.out.print("*Enter Your Mobile Number: ");
@@ -21,42 +31,36 @@ public class main {
                 String pass = input.next();
                 System.out.print("*Confirm Your password: ");
                 String pass2 = input.next();
-                if (!pass.equals(pass2))
-                {
-                    while (true)
-                    {
+                if (!pass.equals(pass2)) {
+                    while (true) {
                         System.out.println("Not Match");
                         System.out.print("Enter Your password again: ");
                         pass = input.next();
                         System.out.print("Confirm Your password: ");
                         pass2 = input.next();
-                        if (pass.equals(pass2))
-                        {
+                        if (pass.equals(pass2)) {
                             break;
                         }
                     }
                 }
                 System.out.print("*Enter Your Username: ");
                 String name = input.next();
-                if (alldata.checkCustomername(name))
-                {
-                    while (true)
-                    {
+                if (dataCustomer.checkCustomername(name)) {
+                    while (true) {
                         System.out.println("This Username was taken");
                         System.out.print("Enter another Username: ");
-                        name=input.next();
-                        if (!alldata.checkCustomername(name))
-                        {
+                        name = input.next();
+                        if (!dataCustomer.checkCustomername(name)) {
                             break;
                         }
                     }
                 }
-                Customer customer= new Customer(name, mobile,em,pass);
-                alldata.addCustomer(customer);
+                System.out.print("*Enter Your BirthDate: in format \"year-month-day\"");
+                String date = input.next();
+                Customer customer = new Customer(name, mobile, em, pass, date);
+                dataCustomer.addCustomer(customer);
                 break;
-            }
-            else if (choice2==2)
-            {
+            } else if (choice2 == 2) {
                 System.out.print("*Enter Your E-mail: ");
                 String em = input.next();
                 System.out.print("*Enter Your Mobile Number: ");
@@ -65,32 +69,26 @@ public class main {
                 String pass = input.next();
                 System.out.print("*Confirm Your password: ");
                 String pass2 = input.next();
-                if (!pass.equals(pass2))
-                {
-                    while (true)
-                    {
+                if (!pass.equals(pass2)) {
+                    while (true) {
                         System.out.println("Not Match");
                         System.out.print("Enter Your password again: ");
                         pass = input.next();
                         System.out.print("Confirm Your password: ");
                         pass2 = input.next();
-                        if (pass.equals(pass2))
-                        {
+                        if (pass.equals(pass2)) {
                             break;
                         }
                     }
                 }
                 System.out.print("*Enter Your Username: ");
                 String name = input.next();
-                if (alldata.checkdrivername(name))
-                {
-                    while (true)
-                    {
+                if (dataDriver.checkdrivername(name)) {
+                    while (true) {
                         System.out.println("This Username was taken");
                         System.out.print("Enter another Username: ");
-                        name=input.next();
-                        if (!alldata.checkdrivername(name))
-                        {
+                        name = input.next();
+                        if (!dataDriver.checkdrivername(name)) {
                             break;
                         }
                     }
@@ -99,23 +97,20 @@ public class main {
                 String li = input.next();
                 System.out.print("*Enter Your National ID: ");
                 String nid = input.next();
-                Driver driver= new Driver(name,mobile,em,pass,li,nid);
-                alldata.addpenders(driver);
+                Driver driver = new Driver(name, mobile, em, pass, li, nid);
+                dataDriver.addpenders(driver);
                 break;
             }
-            if (choice2==3)
-            {
+            if (choice2 == 3) {
                 break;
-            }
-            else {
+            } else {
                 System.out.println("Please Enter Right Choice");
             }
         }
     }
 
 
-    public static void login()
-    {
+    public static void login() {
         while (true) {
             Scanner input = new Scanner(System.in);
             System.out.println("1-Login as Admin.");
@@ -126,53 +121,55 @@ public class main {
             if (choice2 == 1) // login as admin
             {
 
-                    System.out.println("Enter Username:");
-                    String name = input.next();
-                    System.out.println("Enter password:");
-                    String pass = input.next();
+                System.out.println("Enter Username:");
+                String name = input.next();
+                System.out.println("Enter password:");
+                String pass = input.next();
 
-                    if (alldata.searchAdmin(name, pass)) {
-                        while(true){
+                if (dataAdmin.searchAdmin(name, pass)) {
+                    while (true) {
                         System.out.println("1-Delete Customer.");
                         System.out.println("2-Suspend Driver.");
                         System.out.println("3-Verify pending Drivers.");
                         System.out.println("4-Verify Suspended Drivers.");
-                        System.out.println("5-Logout");
+                        System.out.println("5-Show Events Notifications");
+                        System.out.println("6-Logout");
                         int choice = input.nextInt();
                         if (choice == 1) {
                             System.out.print("Enter username: ");
                             String n = input.next();
-                            alldata.suspendCustomer(n);
+                            dataCustomer.suspendCustomer(n);
                         } else if (choice == 2) {
                             System.out.print("Enter username: ");
                             String n = input.next();
-                            alldata.SuspendDriver(n);
+                            dataDriver.SuspendDriver(n);
                         } else if (choice == 3) {
-                            alldata.verifypenders();
+                            dataDriver.verifypenders();
                         } else if (choice == 4) {
                             System.out.print("Enter username: ");
                             String n = input.next();
-                            alldata.verifysuspended(n);
+                            dataDriver.verifysuspended(n);
                         } else if (choice == 5) {
+                            x.See();
+                        } else if (choice == 6) {
                             break;
                         } else {
                             System.out.println("Please Choose Right Choice.");
-                        }}
-                    } else {
-                        System.out.println("Invalid Login");
+                        }
                     }
+                } else {
+                    System.out.println("Invalid Login");
+                }
 
-            }
-            else if (choice2 == 2) // login as Customer
+            } else if (choice2 == 2) // login as Customer
             {
                 System.out.println("Enter Username:");
                 String name = input.next();
                 System.out.println("Enter password:");
                 String pass = input.next();
-                if (alldata.searchCustomer(name, pass)) {
-                    Customer cust = alldata.search(name);
+                if (dataCustomer.searchCustomer(name, pass)) {
+                    Customer cust = dataCustomer.search(name);
                     while (true) {
-
                         System.out.println("1-Request a ride.");
                         System.out.println("2-See notifications.");
                         System.out.println("3-Choose Driver for the Ride");
@@ -186,63 +183,48 @@ public class main {
                             String s = input.next();
                             System.out.println("*Enter Destination of the ride: ");
                             String d = input.next();
-                            cust.requestaAride(s, d);
-                            Ride ride = cust.getRide();
-                            ride.searchDriverForRide(alldata);
-                        }
-                        else if (choice == 2) {
-                            cust.seenotificationonride();
-                        }
-                        else if (choice == 3) {
-                            cust.choosedriver();
-                        }
-                        else if (choice == 4) {
-                            if (cust.getRide()==null)
-                            {
+                            cust.getRideActions().requestaAride(s, d, cust, dataRide, discountArea);
+                            Ride ride = cust.getCustomerRide().getRide();
+                            dataRide.AddRide(ride);
+                            ride.getSuggestedDrivers().searchDriverForRide(dataDriver, ride);
+                        } else if (choice == 2) {
+                            cust.getRideActions().seenotificationonride(cust);
+                        } else if (choice == 3) {
+                            cust.getRideActions().choosedriver(cust, x);
+                        } else if (choice == 4) {
+                            if (cust.getCustomerRide().getRide() == null) {
                                 System.out.println("There is no ride to rate driver.");
                                 System.out.println("");
                                 return;
                             }
                             System.out.print("*Enter the Rate of driver: ");
                             int rate = input.nextInt();
-                            cust.rateRide(rate);
-                        }
-                        else if (choice == 5) {
-                            if (cust.getRide()==null|| cust.getRide().getDriver()==null)
-                            {
+                            cust.getRideRating().rateRide(rate, cust);
+                        } else if (choice == 5) {
+                            if (cust.getCustomerRide().getRide() == null || cust.getCustomerRide().getRide().getRideControl().getDriver() == null) {
                                 System.out.println("Sorry,There is no driver to get his data.");
+                            } else {
+                                cust.getCustomerRide().getRide().printRideInfo();
                             }
-                            else {
-                                cust.getRide().printRideInfo();
-                            }
-                        }
-                        else if(choice==6)
-                        {
-                            cust.deleteride();
-                        }
-                        else if (choice == 7) {
+                        } else if (choice == 6) {
+                            cust.getRideActions().deleteride(cust, dataRide);
+                        } else if (choice == 7) {
                             break;
-                        }
-
-                        else {
+                        } else {
                             System.out.println("Please Choose Right Choice.");
                         }
                     }
-                }
-                else {
+                } else {
                     System.out.println("Invalid Login");
                 }
-            }
-            else if (choice2 == 3) {
+            } else if (choice2 == 3) {
                 System.out.println("Enter Username:");
                 String name = input.next();
                 System.out.println("Enter password:");
                 String pass = input.next();
-                if (alldata.searchDriver(name,pass))
-                {
-                    Driver driver= alldata.searchd(name);
-                    while (true)
-                    {
+                if (dataDriver.searchDriver(name, pass)) {
+                    Driver driver = dataDriver.searchd(name);
+                    while (true) {
                         System.out.println("1-Show User Ratings.");
                         System.out.println("2-See notifications.");
                         System.out.println("3-Suggest price for the Ride.");
@@ -253,92 +235,69 @@ public class main {
                         System.out.println("8-Disable Availability.");
                         System.out.println("9-LogOut");
                         int choice = input.nextInt();
-                        if (choice==1)
-                        {
-                            driver.viewratings();
-                        }
-                        else if (choice==2)
-                        {
-                            driver.viewnotification();
-                        }
-                        else if (choice ==3)
-                        {
-                            driver.checkrequest();
-                        }
-                        else if (choice==4)
-                        {
+                        if (choice == 1) {
+                            driver.getRatingsInfo().viewratings();
+                        } else if (choice == 2) {
+                            driver.getDriverRequests().viewnotification();
+                        } else if (choice == 3) {
+                            driver.getDriverRequests().checkrequest(driver, x);
+                        } else if (choice == 4) {
                             System.out.print("Enter the Area's name: ");
-                            String n= input.next();
-                            driver.addFavarea(n);
-                        }
-                        else if (choice==5)
-                        {
-                            driver.printFavarea();
-                        }
-                        else if (choice==6)
-                        {
-                            if (driver.getsize()==0)
-                            {
+                            String n = input.next();
+                            driver.getFavs().addFavarea(n);
+                        } else if (choice == 5) {
+                            driver.getFavs().printFavarea();
+                        } else if (choice == 6) {
+                            if (driver.getFavs().getsize() == 0) {
                                 System.out.println("There is no area to remove.");
                                 System.out.println("");
                                 return;
                             }
-                            driver.printFavarea();
+                            driver.getFavs().printFavarea();
                             System.out.print("Enter the Area's name: ");
-                            String n= input.next();
-                            driver.deleteFavaArea(n);
-                        }
-                        else if (choice==7)
-                        {
+                            String n = input.next();
+                            driver.getFavs().deleteFavaArea(n);
+                        } else if (choice == 7) {
                             driver.setAvailable(true);
                             System.out.println("Your Availability becomes True.");
                             System.out.println();
 
-                        }
-                        else if (choice==8)
-                        {
+                        } else if (choice == 8) {
                             driver.setAvailable(false);
                             System.out.println("Your Availability becomes False.");
                             System.out.println();
-                        }
-                        else if (choice==9)
-                        {
+                        } else if (choice == 9) {
                             break;
-                        }
-                        else {
+                        } else {
                             System.out.println("Please Choose Right Choice.");
                         }
                     }
-                }
-                else
-                {
+                } else {
                     System.out.println("Invalid Login");
                 }
-            }
-            else if (choice2==4)
-            {
+            } else if (choice2 == 4) {
                 break;
-            }
-            else {
+            } else {
 
             }
         }
     }
 
-    static AllData alldata=new AllData();
+    static DataAdmin dataAdmin = DataAdmin.getAllData();
+    static DataDriver dataDriver = DataDriver.getDataDriver();
+    static DataCustomer dataCustomer = DataCustomer.getDataCustomer();
+    static DataRide dataRide = DataRide.getRid();
+    static DiscountArea discountArea = DiscountArea.getDiscountArea();
 
-    public static void main(String[] args)
-    {
-        Admin x= new Admin("admin1","01178","a1@gmail.com","124563");
-        Admin y= new Admin("admin2","01187","a2@gmail.com","987456");
-        alldata.addadmin(x);
-        alldata.addadmin(y);
-        Customer z = new Customer("mostafa","454","jkjkjk","789");
+    public static void main(String[] args) throws ParseException {
+        Admin x= new Admin("admin","01178","a1@gmail.com","124563");
+        dataAdmin.addadmin(x);
+        Customer z = new Customer("mostafa","454","jkjkjk","789", "2001-04-21");
         Driver zd = new Driver("farida","454","jkjkjk","789", "jk", "30104212102878");
-        Customer d= new Customer("ka","kn","ihi","123");
-        alldata.addCustomer(d);
-        alldata.addCustomer(z);
-        alldata.addpenders(zd);
+        Customer d= new Customer("ka","kn","ihi","123","2012-1-2");
+        dataCustomer.addCustomer(d);
+        dataCustomer.addCustomer(z);
+        dataDriver.addpenders(zd);
         System.out.println("Welcome to Online Transportation System.");
         Scanner input = new Scanner(System.in);
         while (true)
@@ -363,7 +322,6 @@ public class main {
                 System.out.println("Please Enter Right Choice");
             }
         }
-
     }
 }
 /*

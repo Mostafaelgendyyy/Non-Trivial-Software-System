@@ -1,41 +1,20 @@
+package DataBase;
 
-import java.io.LineNumberReader;
+import NonTrivialSoftwareSystem.*;
+
 import java.util.LinkedList;
 
-public class AllData {
-    private LinkedList<Customer>Customers=new LinkedList<Customer>();
-    private LinkedList<Admin>admins=new LinkedList<Admin>();
+public class DataDriver {
     private LinkedList<Driver> pendingDriver = new LinkedList<Driver>();
     private LinkedList<Driver> Drivers = new LinkedList<Driver>();
     private LinkedList<Driver> suspendedDriver = new LinkedList<Driver>();
-    /////////////////////////////////////////////////////////////
+    private static DataDriver dataDriver = new DataDriver();
+    private DataDriver(){
 
-    public void addCustomer(Customer cust)
-    {
-        Customers.add(cust);
     }
-
-    public boolean searchCustomer(String usN, String password)
+    public static DataDriver getDataDriver ()
     {
-        for(int i = 0 ; i <Customers.size();i++)
-        {
-            if(Customers.get(i).getUserName().equals(usN)&& Customers.get(i).getPassWord().equals(password))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    public Customer search(String usN)
-    {
-        for(int i = 0 ; i <Customers.size();i++)
-        {
-            if(Customers.get(i).getUserName().equals(usN))
-            {
-                return Customers.get(i);
-            }
-        }
-        return null;
+        return dataDriver;
     }
     public Driver searchd(String usN)
     {
@@ -48,32 +27,7 @@ public class AllData {
         }
         return null;
     }
-    public boolean checkCustomername(String usN)
-    {
-        for(int i = 0 ; i <Customers.size();i++)
-        {
-            if(Customers.get(i).getUserName().equals(usN))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    public void suspendCustomer(String CustomerName)
-    {
-        for(int i = 0 ; i<Customers.size();i++){
-            if(Customers.get(i).getUserName().equals(CustomerName))
-            {
-                System.out.println("Customer "+ CustomerName + " Was Deleted Successfully.");
-                System.out.println("");
-                Customers.remove(i);
-                return;
-            }
-        }
-        System.out.println("Customer " + CustomerName + " Was not found in the System.");
-        System.out.println("");
-    }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void addpenders(Driver driver)
     {
         pendingDriver.add(driver);
@@ -102,19 +56,6 @@ public class AllData {
         return false;
     }
 
-    public boolean searchAdmin(String usN, String password)
-    {
-        for(int i = 0 ; i <admins.size();i++)
-        {
-            if(admins.get(i).getUserName().equals(usN) &&admins.get(i).getPassWord().equals(password))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    ////////////////////////////////////////////////////////
     public void SuspendDriver(String username) {
         for (int i = 0; i < Drivers.size(); i++) {
             if (Drivers.get(i).getUserName().equals(username)) {
@@ -176,11 +117,18 @@ public class AllData {
 
     public void searchavailable(Ride ride) {
         for (int i = 0; i < Drivers.size(); i++) {
-            Drivers.get(i).SearchFavarea(ride);
+            if(Drivers.get(i).getFavs().SearchFavarea(ride.getSource())&& Drivers.get(i).isAvailable())
+            {
+                Drivers.get(i).getDriverRequests().getRequests().add(ride);
+            }
+            else if (ride.getSource().equalsIgnoreCase(Drivers.get(i).getSource()) && Drivers.get(i).isCanaccept())
+            {
+                Drivers.get(i).getDriverRequests().getRequests().add(ride);
+                Drivers.get(i).setCanaccept(false);
+                Drivers.get(i).setSource("");
+            }
         }
     }
 
-    public void addadmin(Admin x) {
-        admins.add(x);
-    }
+
 }
