@@ -15,7 +15,6 @@ public class DriverFavAreasDetails {
     public boolean SearchFavarea(String ridesource) {
         for (String A : favareas) {
             if (ridesource.equalsIgnoreCase(A)) {
-                //this.getRequests.getRequests().add(ride);
                 return true;
             }
         }
