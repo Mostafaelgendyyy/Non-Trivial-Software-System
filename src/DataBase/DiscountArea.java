@@ -4,7 +4,7 @@ import NonTrivialSoftwareSystem.Discount;
 
 import java.util.LinkedList;
 
-public class DiscountArea {
+public class DiscountArea {//
     LinkedList<String> Area= new LinkedList<String>();
     private static DiscountArea areas = new DiscountArea();
     private DiscountArea(){}

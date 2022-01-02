@@ -4,7 +4,7 @@ import NonTrivialSoftwareSystem.Customer;
 
 import java.util.LinkedList;
 
-public class DataCustomer {
+public class DataCustomer { //
     private LinkedList<Customer> Customers = new LinkedList<Customer>();
     static DataCustomer customer= new DataCustomer();
     private DataCustomer () {

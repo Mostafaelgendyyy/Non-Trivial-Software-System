@@ -4,7 +4,7 @@ public class CustomerRide {
     public Ride getRide() {
         return ride;
     }
-
+///////////
     public void setRide(Ride ride) {
         this.ride = ride;
     }
