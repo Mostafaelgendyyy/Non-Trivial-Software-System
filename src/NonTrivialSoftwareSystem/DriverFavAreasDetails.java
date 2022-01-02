@@ -1,7 +1,7 @@
 package NonTrivialSoftwareSystem;
 
 import java.util.LinkedList;
-
+/////////////////////////////////
 public class DriverFavAreasDetails {
     private LinkedList<String> favareas = new LinkedList<String>();
 
